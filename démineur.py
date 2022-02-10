@@ -1,33 +1,22 @@
-# DÃ©mineur
-
 from tkinter import *
 import random, winsound, sys
 
-# Dessine la grille de jeu
 def grille(nb_col, nb_lignes, dim, origine):
     x1= origine
     y1= origine
-    # DÃ©termine la largeur de la grille
     y2 = y1 + (dim*nb_lignes)
-    # DÃ©termine la hauteur de la grille
     x2 = x1 + (dim*nb_col)
     colonne = 0
     while colonne <= nb_col:
         colonne=colonne+1
-        # CrÃ©ation de la ligne verticale
         can.create_line(x1,y1,x1,y2,width=2, fill="black")
-        # DÃ©calage de la ligne vers la droite
         x1 = x1 + dim
     x1 = origine
     ligne = 0
     while ligne <= nb_lignes:
         ligne=ligne+1
-        # CrÃ©ation de la ligne horizontale
         can.create_line(x1,y1,x2,y1,width=2, fill="black")
-        # DÃ©calage de la ligne vers le bas
         y1 = y1 + dim
-
-# Initialise le niveau de jeu
 def init_niveau():
     global nb_col, nb_lig, nb_mines
     niveau = choix.get()
@@ -311,7 +300,7 @@ def pointeurD(event):
 # ----------------------------------------------------------------------------------------
 
 fen=Tk()
-fen.title("DÃ©mineur")
+fen.title("démineur cool")
 fen.resizable(width=False, height=False)
 
 # DÃ©clarations des variables lorsqu'on ouvre la fenÃªtre principale
@@ -337,37 +326,34 @@ f2 = Frame(fen)
 choix=IntVar()
 choix.set(1)
 case1=Radiobutton(f2)
-case1.configure(text='DÃ©butant', command=init_niveau, variable=choix,value=1)
+case1.configure(text='Noob', command=init_niveau, variable=choix,value=1)
 case1.pack(anchor= NW ,padx=30)
 case2=Radiobutton(f2)
-case2.configure(text='AvancÃ©', padx=3, command=init_niveau, variable=choix,value=2)
+case2.configure(text='Pro', padx=3, command=init_niveau, variable=choix,value=2)
 case2.pack(anchor= NW, padx=30)
 case3=Radiobutton(f2)
-case3.configure(text='Expert', padx=3, command=init_niveau, variable=choix,value=3)
+case3.configure(text='Hecker', padx=3, command=init_niveau, variable=choix,value=3)
 case3.pack(anchor= NW ,padx=30)
 f2.pack()
 
-# Frame Ã  gauche de la grille de jeu pour les compteurs
 f3 = Frame(fen)
-# Champ pour l'affichage du dÃ©compte des mines
+
 texte_mines = Label (f3, text = "Mines restantes :")
 decompte_mines = Label (f3, text = "100")
 texte_mines.grid(row=4,column=1,sticky='NW')
 decompte_mines.grid(row=4,column=2,sticky='NE')
-# Champ pour l'affichage du dÃ©compte des cases
+
 texte_cases = Label (f3, text = "Cases Ã  traiter :")
 decompte_cases = Label (f3, text = "10")
 texte_cases.grid(row=5,column=1,sticky='NW')
 decompte_cases.grid(row=5,column=2,sticky='NE')
 f3.pack()
 
-# Frame Ã  gauche de la grille de jeu pour disposer les boutons
 f1 = Frame(fen)
 bou1 = Button(f1, width=14, text="Nouvelle partie", font="Arial 10", command=init_jeu)
 bou1.pack(side=BOTTOM, padx=5, pady=5)
 f1.pack(side=BOTTOM)
 
-# Frame Ã  gauche de la grille de jeu pour afficher l'image
 f4 = Frame(fen)
 photo=PhotoImage(file="mine1.gif")
 labl = Label(f4, image=photo)
